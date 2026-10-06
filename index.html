@@ -7,14 +7,74 @@
     <title>Você decide o futuro da IA</title>
 </head>
 <body>
-    <div class="caixa-principal">
-        <h1>Você decide o futuro da IA</h1>
-        <div class="caixa-perguntas"></div>
-        <div class="caixa-alternativas"></div>
-        <div class="caixa-resultado">
-            <p class="texto-resultado"></p>
-        </div>
+    <div class="barra-topo">
+        <label for="idioma">Idioma:</label>
+        <select id="idioma" aria-label="Selecionar idioma">
+            <option value="en">1. Inglês</option>
+            <option value="mandarim">2. Mandarim (Chinês)</option>
+            <option value="hindi">3. Hindi</option>
+            <option value="espanhol">4. Espanhol</option>
+            <option value="frances">5. Francês</option>
+            <option value="arabe">6. Árabe Padrão</option>
+            <option value="bengali">7. Bengali</option>
+            <option value="russo">8. Russo</option>
+            <option value="portugues" selected>9. Português</option>
+            <option value="indonesio">10. Indonésio</option>
+        </select>
+        <label for="tema">Cor:</label>
+        <select id="tema" aria-label="Selecionar paleta de cores">
+            <option value="ciano">Ciano</option>
+            <option value="verde">Verde</option>
+            <option value="rosa">Rosa</option>
+            <option value="ambar">Âmbar</option>
+            <option value="azul">Azul</option>
+        </select>
     </div>
+
+    <div class="caixa-principal">
+        <section id="tela-inicial">
+            <h1 id="titulo-principal">Você decide o futuro da IA</h1>
+            <p id="mensagem-inicial">Antes de começar, informe como prefere ser chamado(a). Seu nome será usado no lugar de “você” durante a pesquisa.</p>
+            <form id="form-nome">
+                <label id="rotulo-nome" for="nome-participante">Como podemos chamar você?</label>
+                <input id="nome-participante" name="nome" type="text" maxlength="30" autocomplete="given-name" required>
+                <button id="botao-iniciar" type="submit">Começar pesquisa</button>
+            </form>
+        </section>
+        <section id="tela-pesquisa" hidden>
+            <h1 id="titulo-pesquisa"></h1>
+            <div class="caixa-perguntas"></div>
+            <div class="caixa-alternativas"></div>
+            <div class="caixa-resultado">
+                <p class="texto-resultado"></p>
+            </div>
+        </section>
+    </div>
+    <div class="relogio-local" aria-label="Horário local">
+        <span>Hora local</span>
+        <time id="hora-atual" aria-live="off"></time>
+    </div>
+    <button id="alternar-jogos" class="botao-jogos" type="button" aria-expanded="false" aria-controls="painel-jogos">Jogos</button>
+    <aside id="painel-jogos" class="painel-jogos" aria-labelledby="titulo-jogos" hidden>
+        <div class="cabecalho-jogos">
+            <h2 id="titulo-jogos">Mini-jogos</h2>
+            <button id="fechar-jogos" class="botao-fechar-jogos" type="button" aria-label="Fechar jogos" title="Fechar">×</button>
+        </div>
+        <div class="abas-jogos" role="tablist" aria-label="Escolha um jogo">
+            <button class="aba-jogo ativa" type="button" role="tab" aria-selected="true" aria-controls="jogo-velha" data-jogo="velha">Jogo da velha</button>
+            <button class="aba-jogo" type="button" role="tab" aria-selected="false" aria-controls="jogo-memoria" data-jogo="memoria">Memória</button>
+        </div>
+        <section id="jogo-velha" class="conteudo-jogo" role="tabpanel">
+            <p id="status-velha" class="status-jogo" aria-live="polite">Sua vez: X</p>
+            <div id="tabuleiro-velha" class="tabuleiro-velha" role="group" aria-label="Tabuleiro do jogo da velha"></div>
+            <button id="reiniciar-velha" class="botao-reiniciar" type="button">Nova partida</button>
+        </section>
+        <section id="jogo-memoria" class="conteudo-jogo" role="tabpanel" hidden>
+            <p id="status-memoria" class="status-jogo" aria-live="polite">Encontre os pares. Jogadas: 0</p>
+            <div id="tabuleiro-memoria" class="tabuleiro-memoria" role="group" aria-label="Cartas do jogo da memória"></div>
+            <button id="reiniciar-memoria" class="botao-reiniciar" type="button">Embaralhar</button>
+        </section>
+    </aside>
     <script src="script.js"></script>
 </body>
 </html>

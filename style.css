@@ -1,43 +1,451 @@
-:root{
-    --cor-fundo: #01080E ;
-    --cor-principal: #0B0D20 ;
-    --cor-secundaria: #212333; 
+:root {
+    --cor-fundo: #01080E;
+    --cor-principal: #0B0D20;
+    --cor-secundaria: #212333;
     --cor-destaque: #2BDEFD;
     --cor-texto: #D7F9FF;
+    --cor-borda: rgba(43, 222, 253, 0.35);
+    --cor-fundo-fim: #07131d;
+    --cor-brilho: rgba(43, 222, 253, 0.1);
+}
 
+* {
+    box-sizing: border-box;
 }
 
 body {
-    background-color: var(--cor-fundo);
+    margin: 0;
+    background: linear-gradient(180deg, var(--cor-fundo) 0%, var(--cor-fundo-fim) 100%);
     color: var(--cor-texto);
+    cursor: url("cursor.svg") 4 2, auto;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-}
-
-.caixa-principal{
-    background-color: var(--cor-principal);
-    width: 90%;
-    max-width: 600px;
-    text-align: center;
+    font-family: Arial, sans-serif;
     padding: 20px;
 }
 
-h1{
+a,
+button,
+select,
+label[for],
+[role="button"],
+[role="tab"] {
+    cursor: url("cursor-pointer.svg") 11 3, pointer;
+}
+
+body[data-tema="verde"] {
+    --cor-fundo: #07140f;
+    --cor-principal: #10251b;
+    --cor-secundaria: #1b3829;
+    --cor-destaque: #72e6a1;
+    --cor-texto: #e2f7e9;
+    --cor-borda: rgba(114, 230, 161, 0.36);
+    --cor-fundo-fim: #10291b;
+    --cor-brilho: rgba(114, 230, 161, 0.1);
+}
+
+body[data-tema="rosa"] {
+    --cor-fundo: #190c12;
+    --cor-principal: #2a151f;
+    --cor-secundaria: #452333;
+    --cor-destaque: #ff8fb3;
+    --cor-texto: #ffe8ef;
+    --cor-borda: rgba(255, 143, 179, 0.36);
+    --cor-fundo-fim: #351522;
+    --cor-brilho: rgba(255, 143, 179, 0.1);
+}
+
+body[data-tema="ambar"] {
+    --cor-fundo: #181106;
+    --cor-principal: #2a1e0d;
+    --cor-secundaria: #443117;
+    --cor-destaque: #ffd166;
+    --cor-texto: #fff3d6;
+    --cor-borda: rgba(255, 209, 102, 0.36);
+    --cor-fundo-fim: #35240b;
+    --cor-brilho: rgba(255, 209, 102, 0.1);
+}
+
+body[data-tema="azul"] {
+    --cor-fundo: #07121b;
+    --cor-principal: #102433;
+    --cor-secundaria: #1a384a;
+    --cor-destaque: #67c8ff;
+    --cor-texto: #e3f5ff;
+    --cor-borda: rgba(103, 200, 255, 0.36);
+    --cor-fundo-fim: #102c3d;
+    --cor-brilho: rgba(103, 200, 255, 0.1);
+}
+
+.barra-topo {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(11, 13, 32, 0.9);
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid var(--cor-borda);
+    box-shadow: 0 0 18px var(--cor-brilho);
+    z-index: 10;
+}
+
+.barra-topo label {
+    color: var(--cor-texto);
+    font-size: 0.95rem;
+}
+
+.barra-topo select {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-texto);
+    border: 1px solid var(--cor-borda);
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-size: 0.95rem;
+}
+
+.caixa-principal {
+    background-color: var(--cor-principal);
+    width: 90%;
+    max-width: 700px;
+    text-align: center;
+    padding: 28px 24px;
+    border-radius: 20px;
+    border: 1px solid var(--cor-borda);
+    box-shadow: 0 0 30px var(--cor-brilho);
+    margin-top: 70px;
+}
+
+h1,
+#titulo-pesquisa {
     color: var(--cor-destaque);
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: clamp(1.8rem, 2vw, 2.4rem);
+}
+
+.giro-secreto {
+    animation: giro-secreto 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transform-origin: center;
+}
+
+@keyframes giro-secreto {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#mensagem-inicial {
+    line-height: 1.6;
+    margin: 0 auto 24px;
+    max-width: 540px;
+}
+
+#form-nome {
+    display: grid;
+    gap: 12px;
+    max-width: 420px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+#form-nome input {
+    width: 100%;
+    min-height: 46px;
+    padding: 10px 12px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 10px;
+    background: var(--cor-secundaria);
+    color: var(--cor-texto);
+    font: inherit;
+}
+
+#form-nome input:focus-visible,
+#form-nome button:focus-visible {
+    outline: 2px solid var(--cor-destaque);
+    outline-offset: 3px;
+}
+
+#form-nome button {
+    text-align: center;
+}
+
+.caixa-perguntas {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.caixa-alternativas {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 button {
     background-color: var(--cor-secundaria);
     color: var(--cor-texto);
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 15px;
-    padding: 15px;
-    transition: background-color 0.3s;
+    padding: 15px 18px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    text-align: left;
 }
 
-button:hover{
-    background-color: var(--cor-destaque);
+button:focus-visible {
+    outline: 2px solid var(--cor-destaque);
+    outline-offset: 3px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    button:not(:disabled):hover {
+        background-color: var(--cor-destaque);
+        border-color: var(--cor-destaque);
+        color: var(--cor-principal);
+        transform: translateY(-2px) scale(1.025);
+        box-shadow: 0 8px 18px var(--cor-brilho);
+    }
+}
+
+button:not(:disabled):active {
+    transform: scale(0.985);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    button {
+        transition: none;
+    }
+
+    .giro-secreto {
+        animation: none;
+    }
+}
+
+.caixa-resultado {
+    margin-top: 20px;
+    padding: 18px;
+    border-radius: 15px;
+    background-color: rgba(33, 35, 51, 0.8);
+    border: 1px solid var(--cor-borda);
+}
+
+.texto-resultado {
+    margin: 0;
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+@media (max-width: 640px) {
+    .barra-topo {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 8px;
+    }
+
+    .barra-topo select {
+        max-width: 42vw;
+        padding: 7px 8px;
+        font-size: 0.85rem;
+    }
+
+    .caixa-principal {
+        width: 100%;
+        margin-top: 90px;
+        padding: 24px 18px;
+    }
+}
+
+.botao-jogos {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 20;
+    border: 1px solid var(--cor-borda);
+    background: var(--cor-destaque);
     color: var(--cor-principal);
+    border-radius: 999px;
+    padding: 12px 18px;
+    font-weight: 700;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.relogio-local {
+    position: fixed;
+    left: 18px;
+    bottom: 18px;
+    z-index: 18;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 10px 14px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 10px;
+    background: var(--cor-principal);
+    color: var(--cor-texto);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    font-variant-numeric: tabular-nums;
+}
+
+.relogio-local time {
+    color: var(--cor-destaque);
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.painel-jogos {
+    position: fixed;
+    right: 18px;
+    bottom: 78px;
+    z-index: 19;
+    width: min(360px, calc(100vw - 32px));
+    max-height: calc(100vh - 110px);
+    overflow-y: auto;
+    padding: 16px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 14px;
+    background: var(--cor-principal);
+    color: var(--cor-texto);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.42);
+}
+
+.cabecalho-jogos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.cabecalho-jogos h2 {
+    margin: 0;
+    color: var(--cor-destaque);
+    font-size: 1.2rem;
+}
+
+.botao-fechar-jogos {
+    padding: 4px 10px;
+    font-size: 1.35rem;
+    line-height: 1;
+    text-align: center;
+}
+
+.abas-jogos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.aba-jogo {
+    padding: 9px 8px;
+    text-align: center;
+    font-size: 0.88rem;
+}
+
+.aba-jogo.ativa {
+    border-color: var(--cor-destaque);
+    color: var(--cor-destaque);
+}
+
+.status-jogo {
+    min-height: 1.5em;
+    margin: 8px 0 12px;
+    font-size: 0.92rem;
+}
+
+.tabuleiro-velha {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 7px;
+    width: min(100%, 260px);
+    aspect-ratio: 1;
+    margin: 0 auto 12px;
+}
+
+.casa-velha {
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border-radius: 8px;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.casa-velha:disabled {
+    cursor: default;
+    opacity: 1;
+}
+
+.tabuleiro-memoria {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.carta-memoria {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1;
+    min-width: 0;
+    padding: 0;
+    border-radius: 8px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.carta-memoria.revelada,
+.carta-memoria.encontrada {
+    background: var(--cor-destaque);
+    color: var(--cor-principal);
+}
+
+.carta-memoria.encontrada {
+    cursor: default;
+    opacity: 0.72;
+}
+
+.botao-reiniciar {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+
+@media (max-width: 640px) {
+    .botao-jogos {
+        right: 12px;
+        bottom: 12px;
+    }
+
+    .relogio-local {
+        left: 12px;
+        bottom: 12px;
+        gap: 6px;
+        padding: 9px 10px;
+        font-size: 0.85rem;
+    }
+
+    .relogio-local time {
+        font-size: 0.95rem;
+    }
+
+    .painel-jogos {
+        right: 12px;
+        bottom: 70px;
+        max-height: calc(100vh - 90px);
+    }
 }
